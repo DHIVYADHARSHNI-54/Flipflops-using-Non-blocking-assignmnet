@@ -119,7 +119,7 @@ begin
 ```
 #### SIMULATION OUTPUT
 
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ae7470f1-dbcf-4b29-afa8-6495a0d95666" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/fab6a989-f2f5-4fad-bd36-91a2d02fffae" />
 
 ### D Flip-Flop (Non Blocking)
 ```verilog
