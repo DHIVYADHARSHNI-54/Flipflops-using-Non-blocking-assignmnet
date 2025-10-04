@@ -30,9 +30,9 @@ Non Blocking assignments execute sequentially in the given order, which makes it
 ```verilog
 `timescale 1ns / 1ps
 module SR_FF(S,R,clk,rst,Q);
- input  S,R,clk,rst;
- output reg Q;
- always @(posedge clk) 
+input  S,R,clk,rst;
+output reg Q;
+always @(posedge clk) 
 begin
  if (rst==1)
  Q <= 0;  
@@ -40,7 +40,7 @@ else if(S==0 && R==0)
  Q <= Q;
  else if(S==0 && R==1)
  Q <= 1'b0;
- else if(S==0 && R==0)
+ else if(S==1 && R==0)
  Q <= 1'b1;
  else
  Q <= 1'bx;
@@ -51,11 +51,11 @@ else if(S==0 && R==0)
 ### SR Flip-Flop Test bench 
 ```verilog
 module SR_FF_tb;
- reg s,r,clk,rst;
- wire q;
- SR_FF uut(s,r,clk,rst,q);
- always #5clk=~clk;
- initial 
+reg s,r,clk,rst;
+wire q;
+SR_FF uut(s,r,clk,rst,q);
+always #5clk=~clk;
+initial 
 begin
  clk=0;s=0;r=0;rst=1;
  #10 rst=0;
@@ -71,7 +71,8 @@ begin
 ```
 #### SIMULATION OUTPUT
 
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9643d8c3-29d1-4f8e-ad36-d9923346a56a" />
+<img width="1919" height="1078" alt="image" src="https://github.com/user-attachments/assets/e06d81e8-ee1d-4d7f-979a-2088f7089bca" />
+
 
 
 ### JK Flip-Flop (Non Blocking)
@@ -88,10 +89,10 @@ else if(J==0 && K==0)
  Q <= Q;
  else if(J==0 && K==1)
  Q <= 1'b0;
- else if(J==0 && K==0)
+ else if(J==1 && K==0)
  Q <= 1'b1;
  else
- Q <= 1'bx;
+ Q <= ~Q;
  end
  endmodule
 ```
@@ -119,7 +120,8 @@ begin
 ```
 #### SIMULATION OUTPUT
 
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/fab6a989-f2f5-4fad-bd36-91a2d02fffae" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/2260f4e8-b378-4324-a41b-6b6d9441e3e5" />
+
 
 ### D Flip-Flop (Non Blocking)
 ```verilog
@@ -169,8 +171,10 @@ module DFF_tb;
  begin
  if (rst==1)
  Q<=0;
+ else if(T==0)
+ Q<=Q;
  else
- Q<=T;
+ Q<=~Q;
  end
  endmodule
 ```
@@ -194,7 +198,8 @@ module tb_TFF;
 ```
 
 #### SIMULATION OUTPUT
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/d8303388-3645-4ba5-9dea-de2585f1c3c7" />
+<img width="1919" height="1076" alt="image" src="https://github.com/user-attachments/assets/e9fab94f-e56d-4a60-a145-437c9951ecb1" />
+
 
 
 ### RESULT
